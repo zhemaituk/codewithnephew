@@ -72,8 +72,17 @@ public class TicTacToeFrame {
             }
         });
 
-        game.play();
+        while (true) {
+            oneRound(game);
+        }
     }
+
+    private void oneRound(Game game) {
+        game.play();
+
+        game.restart();
+    }
+
 
     private void repaint(Game game, Graphics2D graphics) {
         SwingUtilities.invokeLater(() -> {

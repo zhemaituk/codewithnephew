@@ -7,7 +7,7 @@ import java.util.Collection;
  */
 public class Game3x3 implements Game {
 
-    private Board board = new Board(3, 3);
+    private Board board;
 
     private Collection<Player> players;
 
@@ -16,12 +16,19 @@ public class Game3x3 implements Game {
     private CompositeGameListener listener = new CompositeGameListener();
 
     public Game3x3(Collection<Player> players) {
+        restart();
         this.players = players;
     }
 
     @Override
     public Board getBoard() {
         return board;
+    }
+
+    @Override
+    public void restart() {
+        board = new Board(3, 3);
+        winner = null;
     }
 
     @Override
@@ -86,12 +93,10 @@ public class Game3x3 implements Game {
             if (won) {
                 return true;
             }
-        }
 
-        for (int i = 0; i < board.getHeight(); i++) {
-            boolean won = true;
+            won = true;
             for (int j = 0; j < board.getWidth(); j++) {
-                if (board.cell(i, j).getState() != player.getFigure()) {
+                if (board.cell(j, i).getState() != player.getFigure()) {
                     won = false;
                     break;
                 }
@@ -105,6 +110,18 @@ public class Game3x3 implements Game {
         boolean won = true;
         for (int i = 0; i < board.getHeight(); i++) {
             if (board.cell(i, i).getState() != player.getFigure()) {
+                won = false;
+                break;
+            }
+        }
+
+        if (won) {
+            return true;
+        }
+
+        won = true;
+        for (int i = 0; i < board.getHeight(); i++) {
+            if (board.cell(i, board.getHeight() - i - 1).getState() != player.getFigure()) {
                 won = false;
                 break;
             }

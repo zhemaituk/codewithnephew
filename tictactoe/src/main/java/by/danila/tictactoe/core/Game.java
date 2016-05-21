@@ -7,6 +7,8 @@ public interface Game {
 
     Board getBoard();
 
+    void restart();
+
     void play();
 
     Player getWinner();
