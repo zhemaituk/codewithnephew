@@ -11,6 +11,7 @@
 
     <modules>
         <module>maze</module>
+        <module>tictactoe</module>
     </modules>
 
     <properties>
