@@ -5,9 +5,9 @@ package by.danila.tictactoe.core;
  */
 public interface GameListener {
 
-    void onGameStarted();
+    void onGameStarted(Game game);
 
-    void onMoved();
+    void onMoved(Game game);
 
-    void onGameFinished();
+    void onGameFinished(Game game);
 }

@@ -43,7 +43,7 @@ public class Game3x3 implements Game {
 
     @Override
     public void play() {
-        listener.onGameStarted();
+        listener.onGameStarted(this);
 
         while (true) {
             for (Player player : players) {
@@ -55,19 +55,19 @@ public class Game3x3 implements Game {
                     }
                 }
 
-                listener.onMoved();
+                listener.onMoved(this);
 
                 if (playerWon(player)) {
                     winner = player;
 
-                    listener.onGameFinished();
+                    listener.onGameFinished(this);
                     return;
                 }
 
                 if (theEnd()) {
                     winner = null;
 
-                    listener.onGameFinished();
+                    listener.onGameFinished(this);
                     return;
                 }
             }

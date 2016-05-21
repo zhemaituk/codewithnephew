@@ -15,17 +15,17 @@ public class CompositeGameListener implements GameListener {
     }
 
     @Override
-    public void onGameStarted() {
-        listeners.stream().forEach(GameListener::onGameStarted);
+    public void onGameStarted(Game game) {
+        listeners.stream().forEach((listener) -> listener.onGameStarted(game));
     }
 
     @Override
-    public void onMoved() {
-        listeners.stream().forEach(GameListener::onMoved);
+    public void onMoved(Game game) {
+        listeners.stream().forEach((listener) -> listener.onMoved(game));
     }
 
     @Override
-    public void onGameFinished() {
-        listeners.stream().forEach(GameListener::onGameFinished);
+    public void onGameFinished(Game game) {
+        listeners.stream().forEach((listener) -> listener.onGameFinished(game));
     }
 }

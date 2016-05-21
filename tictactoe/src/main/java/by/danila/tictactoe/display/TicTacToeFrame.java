@@ -58,16 +58,16 @@ public class TicTacToeFrame {
 
         game.addListener(new GameListener() {
             @Override
-            public void onGameStarted() {
+            public void onGameStarted(Game game) {
             }
 
             @Override
-            public void onMoved() {
+            public void onMoved(Game game) {
                 repaint(game, (Graphics2D) paintPanel.getGraphics());
             }
 
             @Override
-            public void onGameFinished() {
+            public void onGameFinished(Game game) {
                 JOptionPane.showMessageDialog(null, game.getWinner() != null ? game.getWinner() + ", you win!" : "Tied. Piece.");
             }
         });
