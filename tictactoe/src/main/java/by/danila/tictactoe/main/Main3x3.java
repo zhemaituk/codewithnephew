@@ -8,6 +8,7 @@ import by.danila.tictactoe.core.CellState;
 import by.danila.tictactoe.core.Game;
 import by.danila.tictactoe.core.Game3x3;
 import by.danila.tictactoe.core.Player;
+import by.danila.tictactoe.display.HumanPlayer;
 import by.danila.tictactoe.display.TicTacToeFrame;
 
 /**
@@ -20,7 +21,7 @@ public class Main3x3 {
         List<Player> players = new ArrayList<>();
 
         players.add(new DummyPlayer(CellState.CROSS, "Danila"));
-        players.add(new DummyPlayer(CellState.NOUGHT, "Tolik"));
+        players.add(new HumanPlayer(CellState.NOUGHT, "Tolik"));
 
         Game game = new Game3x3(players);
 
