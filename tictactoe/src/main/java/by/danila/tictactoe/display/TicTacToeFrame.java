@@ -36,7 +36,7 @@ public class TicTacToeFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-                CurrentMove.set(e.getY() / CELL_SIZE, e.getX() / CELL_SIZE);
+                CurrentMove.set(game.getBoard().cell(e.getY() / CELL_SIZE, e.getX() / CELL_SIZE));
             }
 
             @Override

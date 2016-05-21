@@ -16,7 +16,7 @@ public class Board {
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                cells[i][j] = new Cell();
+                cells[i][j] = new Cell(i, j);
             }
         }
     }
@@ -33,12 +33,20 @@ public class Board {
         return cells[i][j];
     }
 
-    public void recordMove(Player player, int i, int j) {
+    /**
+     *
+     * @param player
+     * @param cell
+     * @return if move was allowed and successful
+     */
+    public boolean recordMove(Player player, Cell cell) {
 
-        if (cell(i, j).getState() == CellState.OPEN) {
-            cell(i, j).setState(player.getFigure());
+        Cell cellOnBoard = cell(cell.getX(), cell.getY());
+        if (cellOnBoard.getState() == CellState.OPEN) {
+            cellOnBoard.setState(player.getFigure());
+            return true;
         } else {
-            throw new IllegalStateException("Forbidden move");
+            return false;
         }
 
     }

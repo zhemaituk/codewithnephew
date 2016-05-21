@@ -1,8 +1,7 @@
 package by.danila.tictactoe.display;
 
-import javax.swing.*;
-
 import by.danila.tictactoe.core.Board;
+import by.danila.tictactoe.core.Cell;
 import by.danila.tictactoe.core.CellState;
 import by.danila.tictactoe.core.Player;
 
@@ -16,16 +15,7 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public void move(Board board) {
-        CurrentMove.Index2D index = CurrentMove.get();
-
-        try {
-            board.recordMove(this, index.i, index.j);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, this + ", " + e.getLocalizedMessage());
-
-            // Try again.
-            move(board);
-        }
+    public Cell move(Board board) {
+        return CurrentMove.get();
     }
 }

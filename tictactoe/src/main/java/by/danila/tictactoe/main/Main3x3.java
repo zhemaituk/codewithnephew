@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import by.danila.tictactoe.ai.DummyPlayer;
+import by.danila.tictactoe.ai.RandomPlayer;
 import by.danila.tictactoe.core.CellState;
 import by.danila.tictactoe.core.Game;
 import by.danila.tictactoe.core.Game3x3;
@@ -20,7 +21,7 @@ public class Main3x3 {
 
         List<Player> players = new ArrayList<>();
 
-        players.add(new DummyPlayer(CellState.CROSS, "Danila"));
+        players.add(new RandomPlayer(CellState.CROSS, "Danila"));
         players.add(new HumanPlayer(CellState.NOUGHT, "Tolik"));
 
         Game game = new Game3x3(players);

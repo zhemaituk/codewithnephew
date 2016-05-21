@@ -18,7 +18,7 @@ public abstract class Player {
         return figure;
     }
 
-    public abstract void move(Board board);
+    public abstract Cell move(Board board);
 
     @Override
     public String toString() {

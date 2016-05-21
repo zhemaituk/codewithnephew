@@ -47,7 +47,13 @@ public class Game3x3 implements Game {
 
         while (true) {
             for (Player player : players) {
-                player.move(board);
+
+                while (true) {
+                    Cell cell = player.move(board);
+                    if (board.recordMove(player, cell)) {
+                        break;
+                    }
+                }
 
                 listener.onMoved();
 

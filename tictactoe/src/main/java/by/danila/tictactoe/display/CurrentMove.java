@@ -1,5 +1,7 @@
 package by.danila.tictactoe.display;
 
+import by.danila.tictactoe.core.Cell;
+
 /**
  * @author Andrei Zhemaituk
  */
@@ -7,30 +9,20 @@ class CurrentMove {
 
     private static Object monitor = new Object();
 
-    static class Index2D {
+    static Cell current;
 
-        int i;
-        int j;
-    }
-
-    static Index2D current;
-
-    static void set(int i, int j) {
-        Index2D index = new Index2D();
-        index.i = i;
-        index.j = j;
-
+    static void set(Cell cell) {
         synchronized (monitor) {
-            current = index;
+            current = cell;
             monitor.notify();
         }
     }
 
-    static Index2D get() {
+    static Cell get() {
         synchronized (monitor) {
             while (true) {
                 if (current != null) {
-                    Index2D result = current;
+                    Cell result = current;
                     current = null;
                     return result;
                 }
