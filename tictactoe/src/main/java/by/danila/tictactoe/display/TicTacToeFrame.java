@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import by.danila.tictactoe.core.Cell;
 import by.danila.tictactoe.core.Game;
+import by.danila.tictactoe.core.GameListener;
 
 /**
  * @author Andrei Zhemaituk
@@ -28,6 +29,25 @@ public class TicTacToeFrame {
         frame.setVisible(true);
 
         repaint(game, (Graphics2D) paintPanel.getGraphics());
+
+
+        game.addListener(new GameListener() {
+            @Override
+            public void onGameStarted() {
+            }
+
+            @Override
+            public void onMoved() {
+                repaint(game, (Graphics2D) paintPanel.getGraphics());
+            }
+
+            @Override
+            public void onGameFinished() {
+                JOptionPane.showMessageDialog(null, game.getWinner() != null ? game.getWinner() + ", you win!" : "Tied. Piece.");
+            }
+        });
+
+        game.play();
     }
 
     private void repaint(Game game, Graphics2D graphics) {

@@ -19,4 +19,9 @@ public abstract class Player {
     }
 
     public abstract void move(Board board);
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

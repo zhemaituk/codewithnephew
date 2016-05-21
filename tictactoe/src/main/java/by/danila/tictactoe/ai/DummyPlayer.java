@@ -1,4 +1,4 @@
-package by.danila.tictactoe.main;
+package by.danila.tictactoe.ai;
 
 import by.danila.tictactoe.core.Board;
 import by.danila.tictactoe.core.CellState;
@@ -16,6 +16,7 @@ public class DummyPlayer extends Player {
             for (int j = 0; j < board.getHeight(); j++) {
                 if (board.cell(i, j).getState() == CellState.OPEN) {
                     board.recordMove(this, i, j);
+                    return;
                 }
             }
         }

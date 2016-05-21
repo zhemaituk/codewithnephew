@@ -3,6 +3,7 @@ package by.danila.tictactoe.main;
 import java.util.ArrayList;
 import java.util.List;
 
+import by.danila.tictactoe.ai.DummyPlayer;
 import by.danila.tictactoe.core.CellState;
 import by.danila.tictactoe.core.Game;
 import by.danila.tictactoe.core.Game3x3;

@@ -1,6 +1,5 @@
 package by.danila.tictactoe.core;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -14,7 +13,7 @@ public class Game3x3 implements Game {
 
     private Player winner;
 
-    private Collection<GameListener> listeners = new ArrayList<>();
+    private CompositeGameListener listener = new CompositeGameListener();
 
     public Game3x3(Collection<Player> players) {
         this.players = players;
@@ -32,22 +31,30 @@ public class Game3x3 implements Game {
 
     @Override
     public void addListener(GameListener listener) {
-        listeners.add(listener);
+        this.listener.addListener(listener);
     }
 
     @Override
     public void play() {
+        listener.onGameStarted();
+
         while (true) {
             for (Player player : players) {
                 player.move(board);
 
+                listener.onMoved();
+
                 if (playerWon(player)) {
                     winner = player;
+
+                    listener.onGameFinished();
                     return;
                 }
 
                 if (theEnd()) {
                     winner = null;
+
+                    listener.onGameFinished();
                     return;
                 }
             }
