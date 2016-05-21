@@ -1,2 +1,2 @@
 # codewithnephew
-Lazy weekend coding exersise
+Lazy weekend coding exersises
