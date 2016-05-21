@@ -1,65 +1,21 @@
 package by.danila.tictactoe.ai;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Collections;
-
 import by.danila.tictactoe.core.Board;
 import by.danila.tictactoe.core.Cell;
 import by.danila.tictactoe.core.CellState;
 import by.danila.tictactoe.core.Player;
 import by.danila.tictactoe.record.GameSerializer;
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Multiset;
 
 /**
  * @author Andrei Zhemaituk
  */
 public class LearningPlayer extends Player {
 
-    private final File recordings;
+    private final TrainingSet trainingSet;
 
-    public LearningPlayer(CellState figure, String name, File recordings) {
+    public LearningPlayer(CellState figure, String name, TrainingSet trainingSet) {
         super(figure, name);
-        this.recordings = recordings;
-    }
-
-    private Multiset<String> xstat = HashMultiset.create();
-    private Multiset<String> ostat = HashMultiset.create();
-    private Multiset<String> tstat = HashMultiset.create();
-
-    private void learn() {
-        File[] files = recordings.listFiles();
-        if (files == null) {
-            return;
-        }
-
-        for (File file : files) {
-            learnOnGame(file);
-        }
-    }
-
-    private void learnOnGame(File file) {
-        String game = readFile(file.toPath());
-        String[] moves = game.split("\\n\\n");
-
-        CellState winner = GameSerializer.deserializeWinner(moves[moves.length - 1]);
-
-        Multiset<String> stat;
-        if (winner == null) {
-            stat = tstat;
-        } else if (winner == CellState.CROSS) {
-            stat = xstat;
-        } else if (winner == CellState.NOUGHT) {
-            stat = ostat;
-        } else {
-            throw new IllegalStateException("Who was the winner? \n" + game);
-        }
-
-        Collections.addAll(stat, moves);
+        this.trainingSet = trainingSet;
     }
 
     @Override
@@ -90,9 +46,9 @@ public class LearningPlayer extends Player {
     }
 
     private double score(String position) {
-        int me = xstat.count(position);
-        int opponent = ostat.count(position);
-        int tie = tstat.count(position);
+        int me = trainingSet.count(position, CellState.CROSS);
+        int opponent = trainingSet.count(position, CellState.NOUGHT);
+        int tie = trainingSet.count(position, null);
         int total = me + opponent + tie;
 
         if (getFigure() == CellState.NOUGHT) {
@@ -103,15 +59,5 @@ public class LearningPlayer extends Player {
 
         double CURIOSITY_LEVEL = 0.5;
         return total == 0 ? CURIOSITY_LEVEL : (me + tie) / total;
-    }
-
-    private static String readFile(Path path) {
-        byte[] encoded;
-        try {
-            encoded = Files.readAllBytes(path);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return new String(encoded, StandardCharsets.UTF_8);
     }
 }

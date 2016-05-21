@@ -16,12 +16,6 @@ public class Recorder implements GameListener {
 
     private StringBuilder result = new StringBuilder();
 
-    private File folder;
-
-    public Recorder(File folder) {
-        this.folder = folder;
-    }
-
     @Override
     public void onGameStarted(Game game) {
         result = new StringBuilder();
@@ -39,12 +33,9 @@ public class Recorder implements GameListener {
         } else {
             result.append("tie");
         }
+    }
 
-        try (FileWriter writer = new FileWriter(new File(folder,
-                ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT).replace(":", "-")))) {
-            writer.append(result.toString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    protected String getRecording() {
+        return result.toString();
     }
 }
