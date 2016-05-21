@@ -21,6 +21,7 @@ public class FileRecorder extends Recorder {
 
     @Override
     public void onGameFinished(Game game) {
+        super.onGameFinished(game);
         try (FileWriter writer = new FileWriter(new File(folder,
                 ZonedDateTime.now().format(DateTimeFormatter.ISO_INSTANT).replace(":", "-")))) {
             writer.append(getRecording());

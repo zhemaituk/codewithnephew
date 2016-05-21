@@ -25,6 +25,7 @@ public class TrainingSet {
 
     public TrainingSet(File recordings) {
         this.recordings = recordings;
+        learn();
     }
 
     private void learn() {

@@ -20,7 +20,7 @@ public class LearningPlayer extends Player {
 
     @Override
     public Cell move(Board board) {
-        String boardView = GameSerializer.serialize(board);
+        String boardView = GameSerializer.serialize(board).trim();
 
         double bestScore = -1;
         int bestI = -1;

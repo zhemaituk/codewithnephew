@@ -18,6 +18,7 @@ public class TrainingSetRecorder extends Recorder {
 
     @Override
     public void onGameFinished(Game game) {
+        super.onGameFinished(game);
         trainingSet.learnOnGame(getRecording());
     }
 }
